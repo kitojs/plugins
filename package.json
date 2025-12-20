@@ -1,0 +1,12 @@
+{
+  "name": "plugins",
+  "version": "1.0.0",
+  "description": "Workspace for official Kito plugins.",
+  "scripts": {},
+  "author": "Nehuén <github.com/nehu3n>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}

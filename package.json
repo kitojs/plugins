@@ -10,12 +10,17 @@
     "check": "biome check",
     "check:fix": "biome check --write",
 
-    "new:plugin": "tsx scripts/newPlugin.ts"
+    "new:plugin": "tsx scripts/newPlugin.ts",
+
+    "version:apply": "pnpm changeset version",
+    "publish:canary": "pnpm changeset publish --tag next",
+    "publish": "pnpm changeset publish"
   },
   "author": "Nehuén <github.com/nehu3n>",
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "2.3.10",
+    "@changesets/cli": "^2.29.8",
     "@types/node": "^25.0.3",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"

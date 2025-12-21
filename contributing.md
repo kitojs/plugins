@@ -64,6 +64,43 @@ When your work is ready, open a pull request to merge into the `dev` branch. All
 
 ---
 
+### Conventional Commits
+
+All commits must follow **Conventional Commits**:
+
+```
+<type>(<scope>): <subject>
+```
+
+* **Scope**: Use the plugin name (e.g., `plugin-a`) or omit it if the change is general to the repo.
+* **Examples**:
+
+```
+feat(plugin-a): add new option for config
+fix(plugin-b): correct typo in method
+chore: update CI workflow
+```
+
+This ensures automatic versioning and changelog generation via Changesets.
+
+---
+
+### Changesets
+
+Changesets are used to manage versions of each plugin independently.
+
+**Creating a changeset:**
+
+```bash
+pnpm changeset
+```
+
+* Select the packages affected and the type of version (`major`, `minor`, `patch`).
+* This generates a `.md` file inside the `.changeset/` folder.
+* Only create a changeset when the change is **ready to be released** (not for every commit).
+
+---
+
 ### Creating a Plugin
 
 Plugins must follow a **basic structure**. From the repo root, run:
@@ -93,6 +130,8 @@ Don’t forget to add a **readme.md** consistent with other plugins. Review exis
 
 * **Sync regularly:** Fetch the latest `dev` branch before starting work to avoid conflicts.
 * **Respect formatting:** Run `pnpm fmt:fix` and `pnpm lint:fix` regularly and before committing.
+* **Use Conventional Commits:** Always use the plugin name as scope or omit it for repo-wide changes.
+* **Generate Changesets only when ready for release.**
 
 > Alternatively, use the [Biome extension](https://biomejs.dev/guides/editors/first-party-extensions/) for automatic formatting on save.
 

@@ -73,6 +73,7 @@ async function main() {
 
   await mkdir(join(pkgDir, "src"), { recursive: true });
   await mkdir(join(pkgDir, "tests"), { recursive: true });
+  await mkdir(join(pkgDir, "examples"), { recursive: true });
 
   // package.json
   await writeFile(
@@ -91,11 +92,12 @@ async function main() {
             import: "./dist/index.js",
           },
         },
-        files: ["dist"],
+        files: ["dist", "readme.md", "package.json"],
         scripts: {
           build: "tsdown",
           dev: "tsdown --watch",
           test: "vitest",
+          "ex:run": "pnpm build && tsx",
         },
         keywords: ["kito", "plugin"],
         author,
@@ -106,6 +108,7 @@ async function main() {
         devDependencies: {
           tsdown: "latest",
           typescript: "latest",
+          tsx: "latest",
           vitest: "latest",
         },
       },
@@ -163,18 +166,34 @@ export default defineConfig({
 `,
   );
 
-  // src/index.ts (camelCase export)
+  // src/index.ts
   await writeFile(
     join(pkgDir, "src/index.ts"),
     `import { middleware } from "kitojs";
 
 export interface ${pascal(name)}Options {}
 
-export const ${camel(name)} = (_options: ${pascal(name)}Options) =>
+export const ${camel(name)} = (_options?: ${pascal(name)}Options) =>
   middleware(async (ctx, next) => {
     // plugin logic here
     await next();
   });
+`,
+  );
+
+  // examples/basic.ts
+  await writeFile(
+    join(pkgDir, "examples/basic.ts"),
+    `import { server } from "kitojs";
+import { ${camel(name)} } from "../dist/index.mjs"; // plugin
+
+const app = server();
+app.use(${camel(name)}()); // global!
+
+// per-route!
+app.get("/", ${camel(name)}(), ({ res }) => res.send("hello world!"));
+
+app.listen(3000, () => console.log("basic example listening on localhost:3000"));
 `,
   );
 
@@ -184,6 +203,20 @@ export const ${camel(name)} = (_options: ${pascal(name)}Options) =>
     `node_modules
 dist
 `,
+  );
+
+  // .npmignore
+  await writeFile(
+    join(pkgDir, ".npmignore"),
+    `examples
+node_modules
+src
+tests
+.gitignore
+tsconfig.json
+tsdown.config.ts
+vitest.config.ts
+  `,
   );
 
   // readme.md

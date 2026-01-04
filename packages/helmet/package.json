@@ -1,0 +1,43 @@
+{
+  "name": "@kitojs/helmet",
+  "version": "0.1.0",
+  "description": "Helmet middleware for the Kito framework",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "readme.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "ex:run": "pnpm build && tsx"
+  },
+  "keywords": [
+    "kito",
+    "plugin",
+    "helmet",
+    "security",
+    "headers"
+  ],
+  "author": "Nehuén <github.com/nehu3n>",
+  "license": "MIT",
+  "dependencies": {
+    "kitojs": "1.0.0-alpha.8"
+  },
+  "devDependencies": {
+    "tsdown": "latest",
+    "typescript": "latest",
+    "tsx": "latest",
+    "vitest": "latest"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@kitojs/serve-static",
+  "version": "0.1.0",
+  "description": "Static file-server middleware for the Kito framework",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "readme.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "ex:run": "pnpm build && tsx"
+  },
+  "keywords": [
+    "kito",
+    "plugin"
+  ],
+  "author": "Rasmus Schultz <github.com/mindplay-dk>",
+  "license": "MIT",
+  "dependencies": {
+    "kitojs": "latest"
+  },
+  "devDependencies": {
+    "tsdown": "latest",
+    "typescript": "latest",
+    "tsx": "latest",
+    "vitest": "latest"
+  }
+}

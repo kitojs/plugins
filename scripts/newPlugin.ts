@@ -131,7 +131,10 @@ async function main() {
           outDir: "dist",
           skipLibCheck: true,
         },
-        include: ["src"],
+        include: [
+          "src",
+          "test",
+        ],
       },
       null,
       2,

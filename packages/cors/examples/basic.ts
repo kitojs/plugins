@@ -1,5 +1,5 @@
 import { server } from "kitojs";
-import { cors } from "../dist/index.mjs"; // plugin
+import { cors } from "../src/index";
 
 const app = server();
 app.use(cors()); // global!
